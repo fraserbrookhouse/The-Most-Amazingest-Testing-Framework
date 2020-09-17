@@ -18,7 +18,16 @@ describe(NoteListView, function () {
     notelist.createNote('This is also a test note');
     var notelistview = new NoteListView(notelist);
     expect(notelistview.returnView()).toBe(
-      '<ul><li><div>This is a test note</div></li><li><div>This is also a test note</div></li></ul>'
+      '<ul><li><div>This is a test note</div></li><li><div>This is also a test </div></li></ul>'
     );
   });
+  it('returns only 20 characters of a note if the note is longer than that', function () {
+    var notelist = new NoteList();
+    notelist.createNote('This is a test note that is longer than 20 characters');
+    notelist.createNote('This is also a test note');
+    var notelistview = new NoteListView(notelist);
+    expect(notelistview.returnView()).toBe(
+      '<ul><li><div>This is a test note </div></li><li><div>This is also a test </div></li></ul>'
+    )
+  })
 });
